@@ -1,5 +1,5 @@
 name: zerocool
-region: nyc1
+region: fra
 services:
   - name: zerocool
     dockerfile_path: Dockerfile
@@ -7,7 +7,7 @@ services:
     github:
       branch: main
       deploy_on_push: true
-      repo: erchamion/zerocool
+      repo: Erchamion/zerocool
     health_check:
       http_path: /health_check
     http_port: 8000
@@ -15,4 +15,25 @@ services:
     instance_size_slug: basic-xxs
     routes:
       - path: /
-
+    envs:
+      - key: APP_DATABASE__USERNAME
+        scope: RUN_TIME
+        value: ${newsletter.USERNAME}
+      - key: APP_DATABASE__PASSWORD
+        scope: RUN_TIME
+        value: ${newsletter.PASSWORD}
+      - key: APP_DATABASE__HOST
+        scope: RUN_TIME
+        value: ${newsletter.HOSTNAME}
+      - key: APP_DATABASE__PORT
+        scope: RUN_TIME
+        value: ${newsletter.PORT}
+      - key: APP_DATABASE__DATABASE
+        scope: RUN_TIME
+        value: ${newsletter.DATABASE}
+databases:
+  - engine: PG
+    name: newsletter
+    num_nodes: 1
+    size: db-s-dev-database
+    version: "12"
