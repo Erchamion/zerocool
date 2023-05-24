@@ -43,7 +43,7 @@ rustflags = ["-C", "linker=clang", "-C", "link-arg=-fuse-ld=lld"]
 ### watch install
 
 ```shell
-cargo instal cargo-watch
+cargo install cargo-watch
 ```
 
 ### watch example
