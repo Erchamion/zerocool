@@ -26,7 +26,7 @@ pub async fn validate_credentials(
 ) -> Result<uuid::Uuid, AuthError> {
     let mut user_id = None;
     let mut expected_password_hash = Secret::new(
-        "$argon2id$v=19$m=1500,t=2,p=1%\
+        "$argon2id$v=19$m=1500,t=2,p=1$\
         gZiV/M1gPc22ElAH/Jh1Hw$\
         CWOrkoo7oJBQ/iyh7uJ0LO2aLEfrHwTWllSAxt0zRno"
             .to_string(),
@@ -80,8 +80,7 @@ fn verify_password_hash(
     password_candidate: Secret<String>,
 ) -> Result<(), AuthError> {
     let expected_password_hash = PasswordHash::new(expected_password_hash.expose_secret())
-        .context("Failed to parse hash in PHC string format")
-        .map_err(AuthError::UnexpectedError)?;
+        .context("Failed to parse hash in PHC string format")?;
 
     Argon2::default()
         .verify_password(
