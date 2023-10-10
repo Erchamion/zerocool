@@ -1,6 +1,6 @@
 application:
   port: 8000
-  hmac_secret: supersecretcode
+  hmac_secret: supersecretcodethatyouwillneverguess
 database:
   host: "localhost"
   port: 5432
@@ -12,4 +12,3 @@ email_client:
   sender_email: "jon.staten@leadingagile.com"
   authorization_token: "secret-token"
   timeout_milliseconds: 10000
-  
